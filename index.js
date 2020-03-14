@@ -11,6 +11,12 @@ function checkIfTriangle(a, b, c) {
   return false;
 }
 
+function checkTriangleType(a, b, c) {
+  if (a ** a + b ** b > c ** c) return "Acute (Less than 90 degrees)";
+  if (a ** a + b ** b < c ** c) return "Obtuse (Greater than 90 degrees)";
+  return "Right-angle";
+}
+
 function classifyTriangleBySideLength(a, b, c) {
   // Check if all the side lengths are equal to each other
   if (a === b && a === c && b === c)
@@ -37,9 +43,20 @@ function main() {
   // Classify the triangle by side length
   const sizeClassification = classifyTriangleBySideLength(a, b, c);
   console.log(sizeClassification);
+  // Finally, check if the triangle is acute, obtuse or right-angle
+  const triangleType = checkTriangleType(a, b, c);
+  console.log(`Triangle type: ${triangleType}`);
 }
+
+console.log(
+  "Assignment: Test Cases - Triangle\nPlease enter your triangle dimensions:\n"
+);
 
 inquirer
   .prompt(questions)
   .then(storeAnswers)
-  .then(main);
+  .then(main)
+  .catch(err => {
+    console.error(`An error has occured!\n${err}`);
+    process.exit(1);
+  });
