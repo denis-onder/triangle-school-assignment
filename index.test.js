@@ -14,9 +14,7 @@ function generateRandomInput() {
 
 let inputs = generateRandomInput();
 
-describe("Test Suite", () => {
-  // Greeter
-  console.log(`Input: [${inputs}]`);
+describe(`Test Suite - Input: [${inputs}]`, () => {
   // Commence testing
   describe("Special Cases:", () => {
     describe("Input Case: validateInput returns false if the provided inputs are valid, otherwise it returns a list of errors.", () =>
@@ -56,6 +54,38 @@ describe("Test Suite", () => {
       describe("Case 3: It should return a message that the triangle is right-angle if a² + b² are equal to c².", () =>
         it('should return "Right-angle".', () =>
           expect(triangleType).to.eq("Right-angle")));
+    });
+  });
+  describe("Integration Tests:", () => {
+    describe("Input: [7,14,16]", () => {
+      const input = [7, 14, 16];
+      it("should be able to form a triangle.", () => {
+        expect(checkIfTriangle(input)).to.eq(true);
+      });
+      it("should form a triangle with all three different sides.", () => {
+        expect(classifyTriangleBySideLength(input)).to.eq(
+          "The triangle has all three different sides."
+        );
+      });
+      it("should form an obtuse triangle.", () => {
+        expect(checkTriangleType(input)).to.eq(
+          "Obtuse (Greater than 90 degrees)"
+        );
+      });
+    });
+    describe("Input: [2,2,2]", () => {
+      const input = [2, 2, 2];
+      it("should be able to form a triangle.", () => {
+        expect(checkIfTriangle(input)).to.eq(true);
+      });
+      it("should form a triangle with all three equal sides.", () => {
+        expect(classifyTriangleBySideLength(input)).to.eq(
+          "All sides of the triangle are equal."
+        );
+      });
+      it("should form an acute triangle.", () => {
+        expect(checkTriangleType(input)).to.eq("Acute (Less than 90 degrees)");
+      });
     });
   });
 });
