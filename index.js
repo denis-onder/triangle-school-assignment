@@ -6,6 +6,23 @@ let inputs = [];
 const storeAnswers = answers =>
   Object.keys(answers).forEach(k => inputs.push(parseInt(answers[k])));
 
+function handleErrors(...errors) {
+  let msg = "";
+  errors.forEach(error => (msg += error));
+  console.error("\n" + msg.split(",").join(""));
+  process.exit(1);
+}
+
+function validateInput() {
+  let errors = [];
+  for (let i = 0; i < inputs.length; i++) {
+    if (isNaN(inputs[i]))
+      errors.push(`inputs[${i}] contains an invalid value = ${inputs[i]}\n`);
+  }
+  if (errors.length > 0) return errors;
+  return false;
+}
+
 function checkIfTriangle(a, b, c) {
   if (a + b > c && a + c > b && c + b > a) return true;
   return false;
@@ -34,8 +51,11 @@ function main() {
    * - inputs[1] => b (Base);
    * - inputs[2] => c (Right side);
    */
+  // Edge case 1 => Check for invalid inputs
+  const invalidInput = validateInput();
+  if (invalidInput) handleErrors(invalidInput);
+  // Edge case 2 => Check if the inputs can form a triangle.
   const [a, b, c] = inputs;
-  // Edge case 1 => Check if the inputs can form a triangle.
   const isTriangle = checkIfTriangle(a, b, c);
   if (!isTriangle)
     return console.log(`${a}, ${b}, ${c} cannot form a triangle.`);
