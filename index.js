@@ -61,8 +61,8 @@ function main() {
     return console.log(`${a}, ${b}, ${c} cannot form a triangle.`);
   console.log(`${a}, ${b}, ${c} can form a triangle!`);
   // Classify the triangle by side length
-  const sizeClassification = classifyTriangleBySideLength(a, b, c);
-  console.log(sizeClassification);
+  const sideLengthClassification = classifyTriangleBySideLength(a, b, c);
+  console.log(sideLengthClassification);
   // Finally, check if the triangle is acute, obtuse or right-angle
   const triangleType = checkTriangleType(a, b, c);
   console.log(`Triangle type: ${triangleType}`);
