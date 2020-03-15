@@ -76,7 +76,4 @@ inquirer
   .prompt(questions)
   .then(storeAnswers)
   .then(main)
-  .catch(err => {
-    console.error(`An error has occured!\n${err}`);
-    process.exit(1);
-  });
+  .catch(handleErrors);
