@@ -46,16 +46,16 @@ function classifyTriangleBySideLength(a, b, c) {
 
 function main() {
   console.log("Inputs:", inputs);
+  // Edge case 1 => Check for invalid inputs
+  const invalidInput = validateInput();
+  if (invalidInput) handleErrors(invalidInput);
   /**
    * - inputs[0] => a (Left side);
    * - inputs[1] => b (Base);
    * - inputs[2] => c (Right side);
    */
-  // Edge case 1 => Check for invalid inputs
-  const invalidInput = validateInput();
-  if (invalidInput) handleErrors(invalidInput);
-  // Edge case 2 => Check if the inputs can form a triangle.
   const [a, b, c] = inputs;
+  // Edge case 2 => Check if the inputs can form a triangle.
   const isTriangle = checkIfTriangle(a, b, c);
   if (!isTriangle)
     return console.log(`${a}, ${b}, ${c} cannot form a triangle.`);
